@@ -96,7 +96,7 @@
 	</div>
 	<div class="menu-area">
 		{#each menus as menu}
-			<MenuTile photoUrl={menu.photoUrl} name={menu.name} description={menu.description} />
+			<MenuTile photoUrl={menu.photoUrl} name={menu.name} description={menu.description} prices={menu.prices} />
 		{/each}
 	</div>
 </body>

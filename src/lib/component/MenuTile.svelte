@@ -3,6 +3,7 @@
 	export let name: string;
 	export let description: string;
 	export let photoUrl: string;
+	export let prices: {label:string; price:number}[];
 </script>
 
 <div class="menu-tile">

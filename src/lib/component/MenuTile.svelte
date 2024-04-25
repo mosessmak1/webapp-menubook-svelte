@@ -1,58 +1,39 @@
 <script lang="ts">
-	import { coffeeCounter, pizzaCounter, saladCounter, wineCounter } from '$lib/store/order';
+	import { order } from '$lib/store/order';
 	import MenuPrice from './MenuPrice.svelte';
 
 	export let id: string;
 	export let name: string;
 	export let description: string;
 	export let photoUrl: string;
-	export let prices: { label: string; price: number }[];
+	export let prices: { id: string; label: string; price: number }[];
 
-	$: counter =
-		id === 'salad'
-			? $saladCounter
-			: id === 'pizza'
-				? $pizzaCounter
-				: id === 'wine'
-					? $wineCounter
-					: id === 'coffee'
-						? $coffeeCounter
-						: 0;
+	$: counter = $order[id] ?? 0;
 
 	const add = () => {
-		if (id === 'salad') {
-			saladCounter.update((n) => n + 1);
-		} else if (id === 'pizza') {
-			pizzaCounter.update((n) => n + 1);
-		} else if (id === 'wine') {
-			wineCounter.update((n) => n + 1);
-		} else if (id === 'coffee') {
-			coffeeCounter.update((n) => n + 1);
-		}
+		$order[id] = ($order[id] ?? 0) + 1;
+		/**
+		 * Changing the value that's directly under the store is required
+		 * to trigger reactivity.
+		 */
+		$order = { ...$order };
 	};
 
 	const substract = () => {
-		if (id === 'salad') {
-			saladCounter.update((n) => {
-				if (n <= 0) return n;
-				return n - 1;
-			});
-		} else if (id === 'pizza') {
-			pizzaCounter.update((n) => {
-				if (n <= 0) return n;
-				return n - 1;
-			});
-		} else if (id === 'wine') {
-			wineCounter.update((n) => {
-				if (n <= 0) return n;
-				return n - 1;
-			});
-		} else if (id === 'coffee') {
-			coffeeCounter.update((n) => {
-				if (n <= 0) return n;
-				return n - 1;
-			});
-		}
+		/**
+		 * No need to change if the value is already falsy.
+		 * Falsy: 0, null, undefined.
+		 *
+		 * Reference: https://www.freecodecamp.org/news/falsy-values-in-javascript/
+		 */
+		if (!$order[id]) return;
+
+		$order[id] = ($order[id] ?? 0) - 1;
+		/**
+		 * Changing the value that's directly under the store is required
+		 * to trigger reactivity.
+		 */
+		$order = { ...$order };
 	};
 </script>
 
@@ -60,7 +41,12 @@
 	<div class="menu-photo">
 		<img src={photoUrl} alt={name} />
 	</div>
-	<div class="menu-tile-name">{name} ({counter})</div>
+	<div class="menu-tile-name">
+		<div>{name}</div>
+		{#if counter > 0}
+			<div>({counter})</div>
+		{/if}
+	</div>
 	<div class="menu-tile-description">
 		{description}
 	</div>
@@ -93,6 +79,10 @@
 		padding: 8px 16px;
 		align-self: stretch;
 		text-align: center;
+		justify-content: center;
+		display: flex;
+		flex-direction: row;
+		gap: 4px;
 	}
 
 	div.menu-tile-description {

@@ -1,15 +1,17 @@
 import { derived, writable } from "svelte/store";
 
-export const saladCounter = writable(0);
-export const pizzaCounter = writable(0);
-export const wineCounter = writable(0);
-export const coffeeCounter = writable(0);
+export const order = writable<{ [key: string]: number }>({});
 
 // #1
 export const totalOrderCount = derived(
-    [saladCounter, pizzaCounter, wineCounter, coffeeCounter],
+    order,
     (c) => {
-        return c[0] + c[1] + c[2] + c[3];
+        /**
+         * References: 
+         * - https://www.w3schools.com/jsref/jsref_reduce.asp
+         * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values
+         */
+        return Object.values(c).reduce((prev, curr) => prev + curr, 0);
     }
 );
 

@@ -9,15 +9,6 @@
 	export let prices: { id: string; label: string; price: number }[];
 
 	$: counter = $order[id] ?? 0;
-
-	const add = () => {
-		$order[id] = counter + 1;
-	};
-
-	const substract = () => {
-		if (!$order[id]) return;
-		$order[id] = counter - 1;
-	};
 </script>
 
 <div class="menu-tile">

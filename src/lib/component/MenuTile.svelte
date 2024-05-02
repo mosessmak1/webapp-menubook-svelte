@@ -6,7 +6,7 @@
 	export let name: string;
 	export let description: string;
 	export let photoUrl: string;
-	export let prices: { label: string; price: number }[];
+	export let prices: { id: string; label: string; price: number }[];
 
 	$: counter = $order[id] ?? 0;
 
@@ -30,11 +30,8 @@
 	</div>
 
 	{#each prices as p}
-		<MenuPrice label={p.label} price={p.price} />
+		<MenuPrice menuId={id} id={p.id} label={p.label} price={p.price} />
 	{/each}
-
-	<button class="add" on:click={add}> Tambah </button>
-	<button class="substract" on:click={substract}> Kurang </button>
 </div>
 
 <style>

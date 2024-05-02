@@ -1,4 +1,6 @@
 <script lang="ts">
+	export let menuId: string;
+	export let id: string;
 	export let label: string;
 	export let price: number;
 </script>

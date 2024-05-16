@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { order } from '$lib/store/order';
 	import MenuPrice from './MenuPrice.svelte';
 
 	export let id: string;
@@ -7,19 +6,13 @@
 	export let description: string;
 	export let photoUrl: string;
 	export let prices: { id: string; label: string; price: number }[];
-
-	$: counter = Object.keys($order)
-		.filter((e) => e.startsWith(id))
-		.reduce((prev, curr) => {
-			return prev + $order[curr];
-		}, 0);
 </script>
 
 <div class="menu-tile">
 	<div class="menu-photo">
 		<img src={photoUrl} alt={name} />
 	</div>
-	<div class="menu-tile-name">{name} ({counter})</div>
+	<div class="menu-tile-name">{name}</div>
 	<div class="menu-tile-description">
 		{description}
 	</div>

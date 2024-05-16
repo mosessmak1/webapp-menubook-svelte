@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { totalOrderCount } from '$lib/store/order';
+	import { totalOrderCount, totalOrderValue } from '$lib/store/order';
 </script>
 
-<div class="appbar">Kongkow Cafe ({$totalOrderCount})</div>
+<div class="appbar">
+	Kongkow Cafe ({$totalOrderCount} items - Rp {($totalOrderValue * 1000).toLocaleString('id')})
+</div>
 
 <style>
 	div.appbar {

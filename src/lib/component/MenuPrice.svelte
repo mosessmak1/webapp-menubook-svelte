@@ -27,12 +27,8 @@
 	<span class="price-description">{label}</span>
 	<span class="price-value">{price}</span>
 	<div class="calculator">
-		<button on:click={counter > 0 ? substract : null}>
-			{#if counter > 0}
-				<MinusIcon />
-			{:else}
-				<div class="spacer"></div>
-			{/if}
+		<button on:click={counter > 0 ? substract : null} class={counter > 0 ? '' : 'hidden'}>
+			<MinusIcon />
 		</button>
 
 		<span class="counter">{counter}</span>
@@ -47,9 +43,8 @@
 		display: flex;
 	}
 
-	div.spacer {
-		width: 12px;
-		height: 12px;
+	.hidden {
+		visibility: hidden;
 	}
 
 	div.menu-price-row {
@@ -69,6 +64,8 @@
 
 	span.counter {
 		font-size: 12px;
+		width: 12px;
+		text-align: center;
 	}
 
 	div.calculator {

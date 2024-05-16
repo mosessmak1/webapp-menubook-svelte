@@ -38,6 +38,10 @@
 		color: white;
 		font-size: 16px;
 		font-weight: 500;
+		position: sticky;
+		top: 0;
+		left: 0;
+		right: 0;
 	}
 
 	div.hero img {

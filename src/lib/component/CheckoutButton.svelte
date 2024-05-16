@@ -1,10 +1,23 @@
 <script lang="ts">
 	import CheckoutIcon from '$lib/icon/CheckoutIcon.svelte';
 	import ChevronRightIcon from '$lib/icon/ChevronRightIcon.svelte';
-	import { totalOrderCount, totalOrderValue } from '$lib/store/order';
+	import TrashIcon from '$lib/icon/TrashIcon.svelte';
+	import { totalOrderCount, totalOrderValue, order } from '$lib/store/order';
+
+	const clearCart = () => {
+		$order = {};
+		$totalOrderValue = 0;
+	};
+
+	const checkout = () => {
+		// TODO:
+	};
 </script>
 
-<button>
+<button on:click={clearCart}>
+	<TrashIcon />
+</button>
+<button on:click={checkout}>
 	<div class="vertical-text">
 		<span class="count">{$totalOrderCount} item(s)</span>
 		<span class="price">Rp {($totalOrderValue * 1000).toLocaleString('id')}</span>

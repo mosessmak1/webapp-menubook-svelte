@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import CheckoutIcon from '$lib/icon/CheckoutIcon.svelte';
 	import ChevronRightIcon from '$lib/icon/ChevronRightIcon.svelte';
 	import TrashIcon from '$lib/icon/TrashIcon.svelte';
@@ -10,7 +11,7 @@
 	};
 
 	const checkout = () => {
-		// TODO:
+		goto('/order-confirmation');
 	};
 </script>
 

@@ -25,7 +25,14 @@
 	<span class="price-description">{label}</span>
 	<span class="price-value">{price}</span>
 	<div class="calculator">
-		<button on:click={substract}><MinusIcon /></button>
+		<button on:click={counter > 0 ? substract : null}>
+			{#if counter > 0}
+				<MinusIcon />
+			{:else}
+				<div class="spacer"></div>
+			{/if}
+		</button>
+
 		<span class="counter">{counter}</span>
 		<button on:click={add}><PlusIcon /></button>
 	</div>
@@ -36,6 +43,11 @@
 		background: none;
 		border: none;
 		display: flex;
+	}
+
+	div.spacer {
+		width: 12px;
+		height: 12px;
 	}
 
 	div.menu-price-row {
@@ -60,5 +72,6 @@
 	div.calculator {
 		display: flex;
 		align-items: center;
+		justify-content: end;
 	}
 </style>
